@@ -20,7 +20,7 @@ function startAPI() {
 
   app.get('/webPosts', (req, res) => {
 
-    return WebPost.find({ approved: true }).sort({ created_at: -1 }).then(function(dbResp) {
+    return WebPost.find({ approved: true }).sort({ created_at: -1 }).limit(150).then(function(dbResp) {
 
       const finalData = dbResp.map((webPost) => ({
         id: webPost.id,
