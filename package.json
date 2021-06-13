@@ -2,10 +2,16 @@
   "name": "api-xpms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "deploy": "scp ./package.json ./package-lock.json ./Dockerfile.prod ./.gitignore ./.dockerignore root@xpms.pt:~/api-xpms/ && scp -r ./src/ root@xpms.pt:~/api-xpms/ && ssh root@xpms.pt deployApi"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13"
+  }
 }
