@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors')
 
 const Auth = require('./auth');
 const WebPost = require('./schema').webPost;
@@ -13,12 +14,25 @@ require('./mongoose').then(function() {
 function startAPI() {
   const app = express();
 
+  app.use(cors());
+
   app.use(Auth.checkAuth);
 
   app.get('/webPosts', (req, res) => {
 
     return WebPost.find({ approved: true }).then(function(dbResp) {
-      return res.json({ success: true, data: dbResp });
+
+      const finalData = dbResp.map((webPost) => ({
+        id: webPost.id,
+        message: webPost.message,
+        author: {
+          picture: webPost.author.avatarURL,
+          name: webPost.author.username
+        },
+        created_at: webPost.created_at
+      }));
+
+      return res.json({ success: true, data: finalData });
     })
   })
 

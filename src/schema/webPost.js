@@ -5,6 +5,10 @@ const WebPostSchema = new mongoose.Schema({
   author: Object,
   messageObject: Object,
   approved: Boolean,
+  created_at: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 module.exports = mongoose.model('webpost', WebPostSchema);
