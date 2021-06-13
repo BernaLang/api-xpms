@@ -15,7 +15,7 @@ function startAPI() {
 
   app.use(Auth.checkAuth);
 
-  app.get('/wepPosts', (req, res) => {
+  app.get('/webPosts', (req, res) => {
 
     return WebPost.find({ approved: true }).then(function(dbResp) {
       return res.json({ success: true, data: dbResp });
