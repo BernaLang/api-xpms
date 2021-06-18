@@ -4,6 +4,7 @@ const WebPostSchema = new mongoose.Schema({
   message: String,
   author: Object,
   messageObject: Object,
+  attachment: Object,
   approved: Boolean,
   created_at: {
     type: Date,
